@@ -25,7 +25,7 @@ newbalanceDest = st.number_input("New Balance (Receiver)", min_value=0.0, value=
 # Create a button to trigger the prediction
 if st.button("Predict"):
     # Create a DataFrame from the user's input
-    # The column names must exactly match the feature names used during model training
+
     input_data = pd.DataFrame({
         "type": [transaction_type],
         "amount": [amount],
@@ -36,20 +36,20 @@ if st.button("Predict"):
     })
 
     # Use the loaded model to make a prediction
-    prediction = model.predict(input_data)
-    prediction_proba = model.predict_proba(input_data)
+    prediction = model.predict(input_data)             # model.predict → predicts 0 (Not Fraud) or 1 (Fraud)
+    prediction_proba = model.predict_proba(input_data) # model.predict_proba → gives the probabilities of each class: [prob_not_fraud, prob_fraud]
 
     # Display the prediction result
     st.subheader("Prediction Result")
     if prediction[0] == 1:
-        st.error("This transaction is predicted to be FRAUDULENT.")
-        st.write(f"Confidence: {prediction_proba[0][1]*100:.2f}%")
+        st.error("This transaction is predicted to be FRAUDULENT.")        # red alert for fraud.
+        st.write(f"Confidence: {prediction_proba[0][1]*100:.2f}%")    
     else:
-        st.success("This transaction is predicted to be NOT FRAUDULENT.")
+        st.success("This transaction is predicted to be NOT FRAUDULENT.")  # green message for safe transactions.
         st.write(f"Confidence: {prediction_proba[0][0]*100:.2f}%")
 
     st.write("---")
-    st.write("Prediction Probabilities:")
+    st.write("Prediction Probabilities:")                                  # Gives detailed prediction probabilities.
     st.write(f"Probability of Not Fraud: {prediction_proba[0][0]:.4f}")
     st.write(f"Probability of Fraud: {prediction_proba[0][1]:.4f}")
 
