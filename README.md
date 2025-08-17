@@ -21,7 +21,7 @@ The goal of this project was to **analyze transaction data and build a predictiv
   - **Logistic Regression (weighted)**
   - Preprocessing and modeling done via **Scikit-learn Pipelines**
 - Evaluated model performance using **classification metrics** (precision, recall, F1-score, ROC-AUC)
-- Interpreted feature importance using **SHAP values** to understand key drivers of fraud.
+
 
 ### **Result**
 - The model achieved **high recall (~94%) for fraudulent transactions**, allowing detection of most fraud cases.
